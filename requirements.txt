@@ -19,4 +19,4 @@ lxml
 requests-cache
 BeautifulSoup4
 wget
-pymysql
+pymysql 
