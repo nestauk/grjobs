@@ -22,7 +22,7 @@ The final output is a dictionary of jobs that have been classified as 'green' fo
 
 The current methodology results in a weighted F1 score of: **94%**. 
 
-To see methodology on labelled data, see the ```supervised``` jupytext. 
+To see methodology on labelled data, see ```supervised``` in utils. 
 
 ## Running the Green Jobs Pipeline
 
@@ -33,10 +33,6 @@ To clone the repository:
 ```git clone git@github.com:nestauk/green_jobs.git``` 
 
 Please checkout an existing branch (for example, the branch for the PR you are reviewing), or checkout a new branch (which must conform to our naming convention). If you have already made changes to a branch, you should commit or stash these. Then (from the repo base):
-
-```conda env create -f environment.yaml``` - to create the green_jobs environment
-
-```conda activate greenjobs``` - to activate the green_jobs environment 
 
 ```pip install -U -r requirements.txt``` - to upload the necessary requirements to run the script
 
