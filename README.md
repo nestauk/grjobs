@@ -26,11 +26,19 @@ To see methodology on labelled data, see ```supervised``` in utils.
 
 ## Running the Green Jobs Pipeline
 
-Assumed Python version: ```python==3.8```
-
 To clone the repository: 
 
 ```git clone git@github.com:nestauk/grjobs.git``` 
+
+Assumed Python version: ```python==3.8```
+
+- Meet the data science cookiecutter [requirements](http://nestauk.github.io/ds-cookiecutter/quickstart), in brief:
+  - Install: `git-crypt` and `conda`
+  - Have a Nesta AWS account configured with `awscli`
+- Run `make install` to configure the development environment:
+  - Setup the conda environment
+  - Configure pre-commit
+  - Configure metaflow to use AWS
 
 Please checkout an existing branch (for example, the branch for the PR you are reviewing), or checkout a new branch (which must conform to our naming convention). If you have already made changes to a branch, you should commit or stash these. Then (from the repo base):
 
