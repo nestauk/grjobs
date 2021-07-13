@@ -9,3 +9,14 @@ tqdm
 filelock
 typer
 sh
+gensim
+nltk==3.5
+jupyterlab
+boto3
+imblearn
+daps-utils @ https://github.com/nestauk/daps_utils/archive/dev.zip
+lxml
+requests-cache
+BeautifulSoup4
+wget
+pymysql
