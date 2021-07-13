@@ -4,8 +4,7 @@ from ojd_daps.dqa.data_getters import get_locations
 ##0. get Green Jobs 
 
 pretrained_path = '/Users/india.kerlenesta/Projects/ojo/GoogleNews-vectors-negative300.bin.gz'
-training_path = 'training_set.csv'
-green = get_green_jobs(training_path, pretrained_path, None)
+green = get_green_jobs(None, pretrained_path)
 
 ##1. Green jobs by location
 
