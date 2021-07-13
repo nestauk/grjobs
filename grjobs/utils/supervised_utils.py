@@ -136,7 +136,7 @@ def oversample_training_ads(labelled_transform):
 
 def classify_jobs(X_train, y_train, labelled_transform):
     """
-    This function trains an xgboost classifier on oversampled job embeddings
+    This function trains an xgboost classifier on oversampled job matrices
     and predicts whether a job is 'green' or not.
     :return: a list of predictions 
     """
