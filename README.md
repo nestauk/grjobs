@@ -28,7 +28,7 @@ To see methodology on labelled data, see ```supervised``` in utils.
 
 Assumed Python version: ```python==3.8```
 
-To clone the repository:
+To clone the repository: 
 
 ```git clone git@github.com:nestauk/grjobs.git``` 
 
