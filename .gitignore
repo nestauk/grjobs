@@ -101,12 +101,12 @@ target/
 .ipynb_checkpoints/
 
 # exclude /inputs and /outputs/data except top-level markdown
-/inputs/*
-!/inputs/*.md
-/outputs/data/*
-!/outputs/data/*.md
-/outputs/models/*
-!/outputs/models/*.md
+#/inputs/*
+#!/inputs/*.md
+#/outputs/data/*
+#!/outputs/data/*.md
+#/outputs/models/*
+#!/outputs/models/*.md
 
 # Mac OS-specific storage files
 .DS_Store
