@@ -25,7 +25,7 @@ class GreenFlow(FlowSpec):
     
     @step
     def start(self):
-        self.model = load_model('final_model')
+        self.model = load_model('best_model')
         print('loaded model!')
         self.next(self.apply_model)
  
