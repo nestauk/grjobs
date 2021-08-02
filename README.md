@@ -45,13 +45,13 @@ Please checkout an existing branch (for example, the branch for the PR you are r
 
 ```conda install -c anaconda py-xgboost``` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
 
-To train the model with parameters in the base.yaml config file, run the following metaflow command:
+To train the model with parameters in the base.yaml config file, run the following metaflow command (in your activated `grjobs` environment!):
 
 Where `path/to` refers to wherever you have cloned the repository. 
 
 ```python path/to/grjobs/pipeline/train_flow.py run```
 
-To run the saved, trained model on data from the database and output results via json:
+To run the saved, trained model on data from the database and output results via json (in your activated `grjobs` environment!):
 
 Where `path/to` refers to wherever you have cloned the repository. 
 
