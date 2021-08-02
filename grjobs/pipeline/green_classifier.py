@@ -31,6 +31,10 @@ from grjobs.pipeline.create_labelled_data import green_count
 grjobs_config = get_yaml_config(Path(str(PROJECT_DIR) + "/grjobs/config/base.yaml"))
 
 
+# get model ouputs path
+pretrained_model_path = str(PROJECT_DIR) + grjobs_config["MODEL_OUTPUT_PATH"]
+
+
 class GreenClassifier:
     """
     A green classifier class to train/save/load/predict whether
@@ -139,3 +143,19 @@ class GreenClassifier:
             print(classification_report(y, y_pred))
             print(confusion_matrix(y, y_pred))
         return class_rep
+
+    def save_model(self, file_name):
+
+        model_path = pretrained_model_path + file_name + '.pkl'
+
+        with open(model_path, "wb") as f:
+            pickle.dump(self, f)
+
+def load_model(file_name):
+
+    model_path = pretrained_model_path + file_name + '.pkl'
+
+    with open(model_path, "rb") as f:
+        green_model = pickle.load(f)
+
+    return green_model
