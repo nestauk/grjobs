@@ -56,14 +56,15 @@ def get_expanded_green_words() -> list:
 
     expanded_queries = []
     for green_word in all_green_lists[1]:
-        expanded_green_words = [
-            similar_term[0]
-            for similar_term in w2v_model.most_similar(
-                green_word.split(), topn=grjobs_config["similar_words"]
-            )
-        ]
-        for expanded_green_word in expanded_green_words:
-            expanded_queries.append(expanded_green_word.lower().replace("_", " "))
+        if len(green_word) > 0:
+            expanded_green_words = [
+                similar_term[0]
+                for similar_term in w2v_model.most_similar(
+                    green_word.split(), topn=grjobs_config["similar_words"]
+                )
+            ]
+            for expanded_green_word in expanded_green_words:
+                expanded_queries.append(expanded_green_word.lower().replace("_", " "))
 
     all_green_words = list(
         set(
