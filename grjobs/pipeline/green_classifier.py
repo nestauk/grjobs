@@ -24,7 +24,7 @@ from xgboost import XGBClassifier
 from grjobs.utils.text_cleaning_utils import clean_text
 from grjobs import get_yaml_config, Path, PROJECT_DIR
 from grjobs.getters.keywords import get_expanded_green_words
-from grjobs.pipeline.create_training_data import green_count
+from grjobs.pipeline.create_labelled_data import green_count
 
 # ---------------------------------------------------------------------------------
 # Load config file
