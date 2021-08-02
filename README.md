@@ -45,23 +45,21 @@ Please checkout an existing branch (for example, the branch for the PR you are r
 
 ```conda install -c anaconda py-xgboost``` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
 
-To download the pretrained w2v model:
+Then, download the pretrained w2v model:
 
-```wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz"```
+```wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz -P path/to/inputs/pretrained_models"```
 
-make sure its saved in the ```inputs/pretrained_models``` folder.
+where `path/to` refers to wherever you have cloned the repository to the ```inputs/pretrained_models```.
 
-To train the model with parameters in the base.yaml config file, run the following metaflow command (in your activated `grjobs` environment!):
-
-Where `path/to` refers to wherever you have cloned the repository. 
+To train the model with parameters in the ```base.yaml``` config file, run the following metaflow command (in your activated `grjobs` environment!):
 
 ```python path/to/grjobs/pipeline/train_flow.py run```
 
 To run the saved, trained model on data from the database and output results via json (in your activated `grjobs` environment!):
 
-Where `path/to` refers to wherever you have cloned the repository. 
-
 ```python path/to/grjobs/pipeline/green_classifier_flow.py run```
+
+Where `path/to` refers to the path to ```/pipeline``` flows. 
 
 ## To Dos
 
