@@ -47,7 +47,7 @@ Please checkout an existing branch (for example, the branch for the PR you are r
 
 Then, download the pretrained w2v model:
 
-```wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz -P path/to/inputs/pretrained_models"```
+```wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz" -P path/to/inputs/pretrained_models```
 
 where `path/to` refers to wherever you have cloned the repository to the ```inputs/pretrained_models```.
 
