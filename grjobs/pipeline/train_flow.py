@@ -40,8 +40,15 @@ class TrainGreenFlow(FlowSpec):
     @step
     def evaluate(self):
         green_class_results = self.model.evaluate(self.y_test, self.predictions, verbose = True)
+        self.next(self.save)
+
+    def save(self):
+        self.model.save_model('best_model')
         self.next(self.end)
 
     @step
     def end(self):
         print('finished running!')
+
+if __name__ == '__main__':
+    TrainGreenFlow()
