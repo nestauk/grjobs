@@ -51,8 +51,7 @@ class GreenClassifier:
         transform(X_test): predict classes from vectorised text
         evaluate(y_test, y_pred): print classification report
         and confusion matrix based on pipeline
-        save_model(file_name): save model to yaml file
-        load_model(file_name): load model saved to yaml file
+        save_model(file_name): save model to pkl file
     """
 
     def __init__(self, split_random_seed=42):
