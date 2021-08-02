@@ -1,11 +1,17 @@
-"""
-utils.text_cleaning_utils
---------------
-Module for preprocessing and postprocessing of online job vacancy text data and expanded green query list. 
-Author: Karlis Kanders - modified by India Kerle
-"""
+# File: utils/text_cleaning_utils.py
 
-from keyword_expansion_utils import * 
+"""Module for preprocessing and postprocessing of online job vacancy
+   text data.
+
+  Author: Karlis Kanders - modified by India Kerle
+
+  Typical usage example:
+
+  for text in list_of_job_description_texts:
+    clean_text(text)
+
+"""
+# ---------------------------------------------------------------------------------
 
 import pandas as pd
 import string
@@ -18,6 +24,7 @@ from nltk import tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+# ---------------------------------------------------------------------------------
 lemmatizer = WordNetLemmatizer()
 
 ### Compiling regex patterns as they might get used many times over ###
@@ -42,6 +49,7 @@ compiled_padded_punctuation_pattern = re.compile(r"( )([^a-zA-Z0-9 #(++)+])")
 
 ### Components of the text preprocessing pipeline ###
 
+
 def WordNetLemmatizer():
     nltk.download("wordnet")
     return nltk.WordNetLemmatizer()
@@ -51,6 +59,7 @@ def lemmatise(term):
     """Apply the NLTK WN Lemmatizer to the term"""
     lem = WordNetLemmatizer()
     return lem.lemmatize(term)
+
 
 def clean_punctuation(text):
     """Replaces punctuation according to the predefined patterns"""
@@ -104,49 +113,82 @@ def lemmatize_paragraph(text):
     text = " ".join([lemmatizer.lemmatize(token) for token in text.split(" ")])
     return text
 
+
 def remove_punct(text):
     """
-    remove punctuation
+    removes punctuation
     """
     punct = string.punctuation
-    translator = str.maketrans('', '', punct)
+    translator = str.maketrans("", "", punct)
     no_punct = text.translate(translator)
-    
+
     return no_punct
+
 
 def remove_stopwords(text):
     """Removes stopwords"""
     stopws = stopwords.words("english")
-    
-    text = " ".join(
-        [token for token in text.split(" ") if token not in stopws]
-    )
-    
+
+    text = " ".join([token for token in text.split(" ") if token not in stopws])
+
     return text
+
 
 def remove_job_stopwords(text):
-    '''removes job-related stopwords.'''
-    job_stops = ['recruit', 'role', 'cv', 'currently', 'skill', 'website', 'apply', 'please',
-                'background', 'desirable', 'someone', 'salary', 'work', 'career', 'job', 
-                'hour', 'responsibility', 'data', 'now', 'experience', 'candidate', 'application',
-                'looking', 'seeking', 'hourly', 'hour', 'recruitment', 'opportunity', 'part',
-                'exciting', 'graduate', 'consultant']
-    text = " ".join([token for token in text.split(' ') if token not in job_stops])
-    
+    """removes job-related stopwords."""
+    job_stops = [
+        "recruit",
+        "role",
+        "cv",
+        "currently",
+        "skill",
+        "website",
+        "apply",
+        "please",
+        "background",
+        "desirable",
+        "someone",
+        "salary",
+        "work",
+        "career",
+        "job",
+        "hour",
+        "responsibility",
+        "data",
+        "now",
+        "experience",
+        "candidate",
+        "application",
+        "looking",
+        "seeking",
+        "hourly",
+        "hour",
+        "recruitment",
+        "opportunity",
+        "part",
+        "exciting",
+        "graduate",
+        "consultant",
+    ]
+    text = " ".join([token for token in text.split(" ") if token not in job_stops])
+
     return text
 
-def remove_digits(text):
-    '''takes as input a string and returns string stripped of digits.'''
 
-    nums = str.maketrans('', '', digits)
+def remove_digits(text):
+    """takes as input a string and returns string stripped of digits."""
+
+    nums = str.maketrans("", "", digits)
     no_digits = text.translate(nums)
 
     return no_digits
+
 
 def clean_up(text):
     """Removes extra spaces between words"""
     text = " ".join(text)
     return text
+
 
 def word_tokenize(text):
     """tokenises text to the sentence level"""
@@ -171,4 +213,5 @@ def clean_text(text):
         unpad_punctuation,
         remove_punct,
         word_tokenize,
-        clean_up)
+        clean_up,
+    )
