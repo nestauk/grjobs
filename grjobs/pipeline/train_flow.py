@@ -3,7 +3,7 @@
 """A flow for training the model to predict job ad descriptions as 'green' or not.
 
 Typical usage example:
-
+    
     python grjobs/pipeline/train_flow.py run
 
 """
