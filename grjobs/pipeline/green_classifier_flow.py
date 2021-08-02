@@ -33,7 +33,7 @@ class GreenFlow(FlowSpec):
     def apply_model(self):
         jobs = [job for job in get_db_job_ads(limit = 100) if job['description'] != '[]']
         y_pred = self.model.predict(jobs)
-        print('predicted if jobs are green or not!')
+        print('predicted if jobs are green!')
 
         green_jobs = dict()
         for job, label in zip(jobs, y_pred):
