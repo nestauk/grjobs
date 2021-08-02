@@ -4,7 +4,7 @@
 
 The aim of this project is to identify green jobs within the [Open Jobs Observatory](https://github.com/nestauk/ojd_daps) job adverts database as part of a case study deliverable for the Department of Education. 
 
-This repo contains the current methodology for doing so. At a high level, the revised, supervised methodology is as follows:
+This repo contains the methodology for doing so. At a high level, the methodology is as follows:
 
 1) Preprocess the text to: 
 	a) Remove punctuation
@@ -16,13 +16,12 @@ This repo contains the current methodology for doing so. At a high level, the re
 
 2) Generate bespoke normalised green count feature based on keyword expansion   
 3) Create tfidf vectors and stack bespoke feature 
-4) Oversample labelled training embeddings to address class imbalance using a Synthetic Minority Oversampling Technique
-5) Train a gradient boosted decision tree algorithm to predict whether jobs are green or not_green      
-The final output is a dictionary of jobs that have been classified as 'green' following the above methodology. 
+4) Oversample labelled training embeddings to address class imbalance using a Synthetic Minority Oversampling Technique (SMOTE)
+5) Train a gradient boosted decision tree algorithm to predict whether jobs are green or not_green 
+
+The final output is a saved `.json` file of job IDs and their associated class: green or not_green.
 
 The current methodology results in a weighted F1 score of: **94%**. 
-
-To see methodology on labelled data, see ```supervised``` in utils. 
 
 ## Running the Green Jobs Pipeline
 
@@ -46,9 +45,17 @@ Please checkout an existing branch (for example, the branch for the PR you are r
 
 ```conda install -c anaconda py-xgboost``` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
 
-To import word2vec's pretrained model, run:
+To train the model with parameters in the base.yaml config file, run the following metaflow command:
 
-```wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz"```
+Where `path/to` refers to wherever you have cloned the repository. 
+
+```python path/to/grjobs/pipeline/train_flow.py run```
+
+To run the saved, trained model on data from the database and output results via json:
+
+Where `path/to` refers to wherever you have cloned the repository. 
+
+```python path/to/grjobs/pipeline/green_classifier_flow.py run```
 
 ## To Dos
 
