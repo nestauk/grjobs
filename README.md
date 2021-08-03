@@ -41,7 +41,7 @@ Assumed Python version: ```python==3.8```
 
 Please checkout an existing branch (for example, the branch for the PR you are reviewing), or checkout a new branch (which must conform to our naming convention). If you have already made changes to a branch, you should commit or stash these. Then (from the repo base):
 
-```pip install -U -r requirements.txt``` - to upload the necessary requirements to run the script
+``` pip install -e .``` - to upload the necessary requirements to run the script
 
 ```conda install -c anaconda py-xgboost``` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
 
@@ -62,6 +62,8 @@ Alternatively, you can run the already saved, trained model on data from the dat
 This will apply the model to 100 job ads and output a ```.json``` dictionary with job ids and their associated class. For example:
 
 ```{'41547517': 'not_green', '41547520': 'not_green', '41547521': 'not_green'...}```
+
+Do also make sure you have followed the instructions from the [ojd_daps](https://github.com/nestauk/ojd_daps#for-contributors) repo so you can access job ads data from the database. 
 
 ## To Dos
 
