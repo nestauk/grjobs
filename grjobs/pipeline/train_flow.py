@@ -13,7 +13,7 @@ from metaflow import FlowSpec, step
 from grjobs.pipeline.green_classifier import GreenClassifier
 
 from grjobs.getters.keywords import get_expanded_green_words
-from grjobs.pipeline.create_labelled_data import create_labelled_data
+from grjobs.pipeline.create_labelled_data import create_labelled_data, load_from_s3, load_json_from_s3
 # ---------------------------------------------------------------------------------
 
 class TrainGreenFlow(FlowSpec):
@@ -21,7 +21,7 @@ class TrainGreenFlow(FlowSpec):
     @step
     def start(self):
         self.green_words = get_expanded_green_words()
-        self.labelled_data = create_labelled_data('final_training_set', None, self.green_words)
+        self.labelled_data = load_json_from_s3('final_training_set')
         self.model = GreenClassifier() 
         self.next(self.split_data)
 
@@ -42,6 +42,7 @@ class TrainGreenFlow(FlowSpec):
         green_class_results = self.model.evaluate(self.y_test, self.predictions, verbose = True)
         self.next(self.save)
 
+    @step
     def save(self):
         self.model.save_model('best_model')
         self.next(self.end)
