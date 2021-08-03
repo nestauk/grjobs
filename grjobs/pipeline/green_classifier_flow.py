@@ -12,6 +12,7 @@ import json
 
 from metaflow import FlowSpec, step
 
+from grjobs import get_yaml_config, Path, PROJECT_DIR
 from ojd_daps.dqa.data_getters import get_db_job_ads
 from grjobs.pipeline.green_classifier import load_model
 # ---------------------------------------------------------------------------------
