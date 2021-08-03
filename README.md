@@ -49,8 +49,6 @@ Then, download the pretrained w2v model:
 
 ```wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz" -P path/to/inputs/pretrained_models```
 
-where `path/to` refers to wherever you have cloned the repository to the ```inputs/pretrained_models```.
-
 To train the model with model parameters in the ```base.yaml``` config file, run the following metaflow command (in your activated `grjobs` environment!):
 
 ```python path/to/grjobs/pipeline/train_flow.py run```
