@@ -1,12 +1,6 @@
 # File: pipeline/green_classifier.py
 
-"""Module for GreenClassifier class.
-
-  Typical usage example:
-
-  python grjobs/pipeline/green_classifier.py
-
-"""
+"""Module for GreenClassifier class."""
 # ---------------------------------------------------------------------------------
 import numpy as np
 from collections import Counter
