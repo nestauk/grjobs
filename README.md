@@ -51,15 +51,19 @@ Then, download the pretrained w2v model:
 
 where `path/to` refers to wherever you have cloned the repository to the ```inputs/pretrained_models```.
 
-To train the model with parameters in the ```base.yaml``` config file, run the following metaflow command (in your activated `grjobs` environment!):
+To train the model with model parameters in the ```base.yaml``` config file, run the following metaflow command (in your activated `grjobs` environment!):
 
 ```python path/to/grjobs/pipeline/train_flow.py run```
 
-To run the saved, trained model on data from the database and output results via json (in your activated `grjobs` environment!):
+This will output a ```'best_model.pkl'``` that you can then load and apply to the job ads data.
+
+Alternatively, you can run the already saved, trained model on data from the database by running:
 
 ```python path/to/grjobs/pipeline/green_classifier_flow.py run```
 
-Where `path/to` refers to the path to ```/pipeline``` flows. 
+This will apply the model to 100 job ads and output a ```.json``` dictionary with job ids and their associated class. For example:
+
+```{'41547517': 'not_green', '41547520': 'not_green', '41547521': 'not_green'...}```
 
 ## To Dos
 
