@@ -22,6 +22,7 @@ class TrainGreenFlow(FlowSpec):
     def start(self):
         self.labelled_data = load_json_from_s3('final_training_set')
         self.model = GreenClassifier() 
+        print('instantiated green class!')
         self.next(self.split_data)
 
     @step
