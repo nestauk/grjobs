@@ -39,6 +39,7 @@ Assumed Python version: ```python==3.8```
   - Configure pre-commit
   - Configure metaflow to use AWS
 
+
 Please checkout an existing branch (for example, the branch for the PR you are reviewing), or checkout a new branch (which must conform to our naming convention). If you have already made changes to a branch, you should commit or stash these. Then (from the repo base):
 
 ``` pip install -e .``` - to upload the necessary requirements to run the script
@@ -64,8 +65,6 @@ This will apply the model to 100 job ads and output a ```.json``` dictionary wit
 ```{'41547517': 'not_green', '41547520': 'not_green', '41547521': 'not_green'...}```
 
 Do also make sure you have followed the instructions from the [ojd_daps](https://github.com/nestauk/ojd_daps#for-contributors) repo so you can access job ads data from the database. 
-
-## To Dos
 
 ## Contributor guidelines
 
