@@ -20,3 +20,5 @@ requests-cache
 BeautifulSoup4
 wget
 pymysql 
+mysql-connector-python
+python-Levenshtein
