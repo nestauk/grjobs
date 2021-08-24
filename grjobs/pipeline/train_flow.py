@@ -13,14 +13,14 @@ from metaflow import FlowSpec, step
 from grjobs.pipeline.green_classifier import GreenClassifier
 
 from grjobs.getters.keywords import get_expanded_green_words
-from grjobs.pipeline.create_labelled_data import create_labelled_data, load_json_from_s3
+from grjobs.pipeline.create_labelled_data import load_json_from_s3
 # ---------------------------------------------------------------------------------
 
 class TrainGreenFlow(FlowSpec):
     
     @step
     def start(self):
-        self.labelled_data = load_json_from_s3('final_training_set')
+        self.labelled_data = load_json_from_s3('new_training_data') 
         self.model = GreenClassifier() 
         print('instantiated green class!')
         self.next(self.split_data)
