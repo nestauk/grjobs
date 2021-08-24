@@ -1,5 +1,7 @@
+# %% [markdown]
 # File: pipeline/green_classifier.py
 
+# %%
 """Module for GreenClassifier class."""
 # ---------------------------------------------------------------------------------
 import numpy as np
@@ -8,6 +10,7 @@ import os
 import json
 import pickle
 
+# %%
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 from imblearn.pipeline import Pipeline
@@ -15,20 +18,24 @@ from imblearn.over_sampling import SMOTE
 from sklearn.feature_extraction.text import TfidfVectorizer
 from xgboost import XGBClassifier
 
+# %%
 from grjobs.utils.text_cleaning_utils import clean_text
 from grjobs import get_yaml_config, Path, PROJECT_DIR
 from grjobs.getters.keywords import get_expanded_green_words
 from grjobs.pipeline.create_labelled_data import green_count
 
+# %%
 # ---------------------------------------------------------------------------------
 # Load config file
 grjobs_config = get_yaml_config(Path(str(PROJECT_DIR) + "/grjobs/config/base.yaml"))
+green_list_path = str(PROJECT_DIR) + grjobs_config["GREEN_LIST_PATH"]
 
-
+# %%
 # get model ouputs path
 pretrained_model_path = str(PROJECT_DIR) + grjobs_config["MODEL_OUTPUT_PATH"]
 
 
+# %%
 class GreenClassifier:
     """
     A green classifier class to train/save/load/predict whether
@@ -62,7 +69,7 @@ class GreenClassifier:
 
     def preprocess_green_count(self, job_ads):
 
-        expanded_green_words = get_expanded_green_words()
+        expanded_green_words = [word for word in open(green_list_path + "all_green_words.txt").read().split("\n") if word != '']
 
         for ad in job_ads:
             ad["green_count"] = green_count(
@@ -144,6 +151,7 @@ class GreenClassifier:
         with open(model_path, "wb") as f:
             pickle.dump(self, f)
 
+# %%
 def load_model(file_name):
 
     model_path = pretrained_model_path + file_name + '.pkl'
