@@ -1,0 +1,11 @@
+GREEN_LIST_PATH: "/inputs/green_lists/"
+PRETRAINED_PATH: "/inputs/pretrained_models/GoogleNews-vectors-negative300.bin.gz"
+MODEL_OUTPUT_PATH: "/outputs/models/"
+PRED_OUTPUT_PATH: "/outputs/data/"
+
+similar_words: 10
+min_df: 0.05
+max_df: 0.60
+max_depth: 7
+min_child_weight: 1
+test_size: 0.1
