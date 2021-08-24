@@ -45,27 +45,26 @@ Please checkout an existing branch (for example, the branch for the PR you are r
 
 ```conda install -c anaconda py-xgboost``` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
 
+```conda install -c conda-forge hdbscan``` - to install hdbscan for job title clustering analysis
+
 Then, download the pretrained w2v model:
 
 ```wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz" -P path/to/inputs/pretrained_models```
 
 To train the model with model parameters in the ```base.yaml``` config file, run the following metaflow command (in your activated `grjobs` environment!):
 
-```python path/to/grjobs/pipeline/train_flow.py run```
+```python grjobs/pipeline/train_flow.py run```
 
 This will output a ```'best_model.pkl'``` that you can then load and apply to the job ads data.
 
 Alternatively, you can run the already saved, trained model on data from the database by running:
 
-```python path/to/grjobs/pipeline/green_classifier_flow.py run```
+```python grjobs/pipeline/green_classifier_flow.py run```
 
-This will apply the model to 100 job ads and output a ```.json``` dictionary with job ids and their associated class. For example:
+This will apply the model to 100 job ads within the job ads database and assign an associated class (green or not_green) per job.  
 
-```{'41547517': 'not_green', '41547520': 'not_green', '41547521': 'not_green'...}```
+To access the ojd_daps codebase and job ads data from the database, you will need to clone the ojd_daps repo by following instructions [here](https://github.com/nestauk/ojd_daps#for-contributors). Make sure you have run ```export PYTHONPATH=$PWD``` at the repository's root to access the codebase. You will need to either be on Nesta HQ's wifi or have your VPN turned on to access the job ads data. 
 
-Do also make sure you have followed the instructions from the [ojd_daps](https://github.com/nestauk/ojd_daps#for-contributors) repo so you can access job ads data from the database. 
-
-## To Dos
 
 ## Contributor guidelines
 
