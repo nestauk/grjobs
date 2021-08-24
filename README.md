@@ -19,8 +19,6 @@ This repo contains the methodology for doing so. At a high level, the methodolog
 4) Oversample labelled training embeddings to address class imbalance using a Synthetic Minority Oversampling Technique (SMOTE)
 5) Train a gradient boosted decision tree algorithm to predict whether jobs are green or not_green 
 
-The final output is a saved `.json` file of job IDs and their associated class: green or not_green.
-
 The current methodology results in a weighted F1 score of: **94%**. 
 
 ## Running the Green Jobs Pipeline
