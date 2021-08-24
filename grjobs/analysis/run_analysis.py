@@ -1,9 +1,6 @@
 # File: analysis/run_analysis.py
 
 """Module for running analysis on labelled job ads in s3. 
-
-Example Usage:
-    python grjobs/analysis/plot_analysis.py
 """
 # ---------------------------------------------------------------------------------
 import pickle
@@ -128,7 +125,7 @@ def get_salaries(labelled_jobs) -> list:
 
     non_green_salaries = []
     green_ids = get_green_ids(labelled_jobs)
-    for job in get_db_job_ads(limit = 5, return_features = True):
+    for job in get_db_job_ads(limit = None, return_features = True):
         salary_range = [job['features']['salary']['min_annualised_salary'], job['features']['salary']['max_annualised_salary']]
         if job['id'] not in green_ids and 'salary' in job['features'].keys():
             non_green_salaries.append(salary_range)
@@ -139,8 +136,8 @@ def calculate_median_salaries(labelled_jobs):
     """Calculates median minimum salary and median maximum salary of labelled jobs. 
 
     Returns:
-        four values - median mimimum salary for green jobs, median minimum salary for non green jobs,  median maximum salary for green jobs, 
-        median maximum salary for non green jobs.
+        four values - median min salary for green jobs, median max salary for green jobs,  median min salary for non green jobs, 
+        median max salary for non green jobs.
     """ 
     green_salaries, non_green_salaries = get_salaries(labelled_jobs)
 
