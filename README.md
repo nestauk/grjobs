@@ -47,9 +47,6 @@ Please checkout an existing branch (for example, the branch for the PR you are r
 
 ```conda install -c conda-forge hdbscan``` - to install hdbscan for job title clustering analysis
 
-Then, download the pretrained w2v model:
-
-```wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz" -P path/to/inputs/pretrained_models```
 
 To train the model with model parameters in the ```base.yaml``` config file, run the following metaflow command (in your activated `grjobs` environment!):
 
