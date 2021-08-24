@@ -1,0 +1,11 @@
+FONT_PATH: '/inputs/analysis_assets/fonts/Averta_Standard/AvertaStd-Bold.ttf'
+
+embedding_model: 'paraphrase-MiniLM-L6-v2'
+n_neighbors: 15
+components: 2
+umap_metric: 'cosine'
+cluster_size: 40
+hdbscan_metric: 'manhattan'
+method: 'eom'
+max_df: 0.95
+membership_prob: 0.7
