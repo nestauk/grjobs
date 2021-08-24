@@ -11,6 +11,7 @@ adding 'green' count feature to jobs description data.
 # ---------------------------------------------------------------------------------
 import boto3
 import json
+import pickle
 import collections
 
 from functools import lru_cache
@@ -32,11 +33,14 @@ def load_from_s3(filename):
     obj = s3.get_object(Bucket=BUCKET_NAME, Key=S3_PATH.format(filename))
     return obj["Body"].read().decode()
 
-
 def load_json_from_s3(prefix="final_training_set"):
     """Save data as json from S3"""
     return json.loads(load_from_s3(f"{prefix}.json"))
 
+def load_pkl_from_s3(prefix="green_jobs_output"): 
+    """Save data as pickle from S3"""
+    s3 = boto3.resource("s3")
+    return pickle.loads(s3.Bucket(BUCKET_NAME).Object(S3_PATH.format(f"{prefix}.pkl")).get()['Body'].read())
 
 def green_count(text, green_words):
     """Counts number of any green terms or phrases per
