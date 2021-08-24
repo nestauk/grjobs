@@ -22,3 +22,8 @@ wget
 pymysql 
 mysql-connector-python
 python-Levenshtein
+umap-learn
+sentence_transformers
+python-dotenv
+pyyaml
+ipywidgets
