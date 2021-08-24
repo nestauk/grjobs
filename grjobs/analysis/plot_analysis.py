@@ -1,9 +1,6 @@
 # File: analysis/plot_analysis.py
 
 """Module for plotting graphs based off analysis on labelled job ads in s3. 
-
-Example Usage:
-	python grjobs/analysis/plot_analysis.py
 """
 # ---------------------------------------------------------------------------------
 import random
