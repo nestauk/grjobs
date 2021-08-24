@@ -34,7 +34,7 @@ def get_green_ids(labelled_jobs):
     return [job['id'] for job in labelled_jobs]
 
 def get_transformer():
-    """loads sentence transformer"""
+    """loads sentence transformer responsible for embedding job titles."""
     return SentenceTransformer(analysis_params['embedding_model'])
 
 def cluster_job_titles(labelled_jobs) -> pd.DataFrame():
