@@ -9,7 +9,6 @@ import pandas as pd
 
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
-from sentence_transformers import SentenceTransformer
 
 #
 from ojd_daps.dqa.data_getters import get_db_job_ads
