@@ -33,7 +33,7 @@ def plot_job_title_clusters(labelled_jobs, random_cluster_no) -> plt:
      on a scatter plot. 
          
     Returns:
-        A labelled scatter plot of job title clusters and their associated cluster labels. 
+        A labelled scatter plot of job title clusters and their associated cluster label. 
 
     """ 
     embedding_df = cluster_job_titles(labelled_jobs)
