@@ -1,5 +1,0 @@
-* 2020-10-05 Point snapping is disabled in all datasets, number of decimals increased for 01M datasets.
-* 2020-11-18 Inclusion of Jan Mayen and Svalbard in to Norways Statistical Regions. Amendment to Serbia NUTS BN line status.
-* 2020-12-05 Fixed broken utf-8 encoding.
-* 2021-03-15 Added LAU 2011,2012,2013,2014,2015,2020
-* 2021-04-26 Fixed country labels 2001, 2006 (incorrect Kosovo coordinates)
