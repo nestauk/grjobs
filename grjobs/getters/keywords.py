@@ -78,4 +78,7 @@ def get_expanded_green_words() -> list:
         )
     )
 
+    with open(green_list_path + "all_green_words.txt", "w") as outfile:
+        outfile.write("\n".join(all_green_words))
+
     return all_green_words
