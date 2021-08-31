@@ -69,7 +69,11 @@ class GreenClassifier:
 
     def preprocess_green_count(self, job_ads):
 
-        expanded_green_words = [word for word in open(green_list_path + "all_green_words.txt").read().split("\n") if word != '']
+        expanded_green_words = [
+            word
+            for word in open(green_list_path + "all_green_words.txt").read().split("\n")
+            if word != ""
+        ]
 
         for ad in job_ads:
             ad["green_count"] = green_count(
@@ -146,15 +150,16 @@ class GreenClassifier:
 
     def save_model(self, file_name):
 
-        model_path = pretrained_model_path + file_name + '.pkl'
+        model_path = pretrained_model_path + file_name + ".pkl"
 
         with open(model_path, "wb") as f:
             pickle.dump(self, f)
 
+
 # %%
 def load_model(file_name):
 
-    model_path = pretrained_model_path + file_name + '.pkl'
+    model_path = pretrained_model_path + file_name + ".pkl"
 
     with open(model_path, "rb") as f:
         green_model = pickle.load(f)
