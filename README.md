@@ -1,33 +1,35 @@
 # Green Jobs
 
-## Identifying Green Jobs 
+## Identifying Green Jobs
 
-The aim of this project is to identify green jobs within the [Open Jobs Observatory](https://github.com/nestauk/ojd_daps) job adverts database as part of a case study deliverable for the Department of Education. 
+The aim of this project is to identify green jobs within the [Open Jobs Observatory](https://github.com/nestauk/ojd_daps) job adverts database as part of a case study deliverable for the Department of Education.
 
 This repo contains the methodology for doing so. At a high level, the methodology is as follows:
 
-1) Preprocess the text to: 
-	a) Remove punctuation
-	b) Detect sentences
-	c) Lemmatise terms
-	d) lowercase terms
-	e) remove numbers
-	f) remove stopwords
+1. Preprocess the text to:
+   a) Remove punctuation
+   b) Detect sentences
+   c) Lemmatise terms
+   d) lowercase terms
+   e) remove numbers
+   f) remove stopwords
 
-2) Generate bespoke normalised green count feature based on keyword expansion   
-3) Create tfidf vectors and stack bespoke feature 
-4) Oversample labelled training embeddings to address class imbalance using a Synthetic Minority Oversampling Technique (SMOTE)
-5) Train a gradient boosted decision tree algorithm to predict whether jobs are green or not_green 
+2. Generate bespoke normalised green count feature based on keyword expansion
+3. Create tfidf vectors and stack bespoke feature
+4. Oversample labelled training embeddings to address class imbalance using a Synthetic Minority Oversampling Technique (SMOTE)
+5. Train a gradient boosted decision tree algorithm to predict whether jobs are green or not_green
 
-The current methodology results in a weighted F1 score of: **94%**. 
+The current methodology results in a weighted F1 score of: **94%**.
 
 ## Running the Green Jobs Pipeline
 
-To clone the repository: 
+## Setting up
 
-```git clone git@github.com:nestauk/grjobs.git``` 
+To clone the repository:
 
-Assumed Python version: ```python==3.8```
+`git clone git@github.com:nestauk/grjobs.git`
+
+Assumed Python version: `python==3.8`
 
 - Meet the data science cookiecutter [requirements](http://nestauk.github.io/ds-cookiecutter/quickstart), in brief:
   - Install: `git-crypt` and `conda`
@@ -39,27 +41,36 @@ Assumed Python version: ```python==3.8```
 
 Please checkout an existing branch (for example, the branch for the PR you are reviewing), or checkout a new branch (which must conform to our naming convention). If you have already made changes to a branch, you should commit or stash these. Then (from the repo base):
 
-``` pip install -e .``` - to upload the necessary requirements to run the script
+` pip install -e .` - to upload the necessary requirements to run the script
 
-```conda install -c anaconda py-xgboost``` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
+`conda install -c anaconda py-xgboost` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
 
-```conda install -c conda-forge hdbscan``` - to install hdbscan for job title clustering analysis
+`conda install -c conda-forge hdbscan` - to install hdbscan for job title clustering analysis
 
+To access the ojd_daps codebase and job ads data from the database, you will need to clone the ojd_daps repo by following instructions [here](https://github.com/nestauk/ojd_daps#for-contributors). Make sure you have run `export PYTHONPATH=$PWD` at the repository's root to access the codebase. You will need to either be on Nesta HQ's wifi or have your VPN turned on to access data from the database.
 
-To train the model with model parameters in the ```base.yaml``` config file, run the following metaflow command (in your activated `grjobs` environment!):
+## Training/applying the model
 
-```python grjobs/pipeline/train_flow.py run```
+To train the model with model parameters in the `base.yaml` config file, run the following metaflow command (in your activated `grjobs` environment!):
 
-This will output a ```'best_model.pkl'``` that you can then load and apply to the job ads data.
+`python grjobs/pipeline/train_flow.py run`
 
-Alternatively, you can run the already saved, trained model on data from the database by running:
+This will output a `'best_model.pkl'` that you can then load and apply to the job ads data.
 
-```python grjobs/pipeline/green_classifier_flow.py run```
+Alternatively, you can run the already saved, trained model on data from the OJO database by running:
 
-This will apply the model to 100 job ads within the job ads database and assign an associated class (green or not_green) per job.  
+`python grjobs/pipeline/green_classifier_flow.py run`
 
-To access the ojd_daps codebase and job ads data from the database, you will need to clone the ojd_daps repo by following instructions [here](https://github.com/nestauk/ojd_daps#for-contributors). Make sure you have run ```export PYTHONPATH=$PWD``` at the repository's root to access the codebase. You will need to either be on Nesta HQ's wifi or have your VPN turned on to access the job ads data. 
+This will apply the model to 100 job ads within the job ads database and assign an associated class (green or not_green) per job.
 
+Finally, if you want to run the model on a job advert outside the database, run the following:
+
+```
+model = load_model('best_model')
+model.predict([JOB ADVERT])
+```
+
+Where the model takes a list of job adverts as input. NOTE: the job advert will need to be structured identically to jobs in database i.e. the job advert must be a dictionary with keys `job_title_raw` and `description` containing the job title and job description as values.
 
 ## Contributor guidelines
 
