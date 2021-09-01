@@ -85,6 +85,7 @@ def plot_job_title_clusters(labelled_jobs, random_cluster_no):
         texts, force_points=1, arrowprops=dict(arrowstyle="->", color="r", lw=0.5)
     )
 
+
 def plot_green_locations(labelled_jobs):
     """
      Plots percentage of job adverts in green industries nuts 2 code. 
@@ -120,7 +121,7 @@ def plot_green_locations(labelled_jobs):
     # plot
     fig, ax = plt.subplots(figsize=(9.2, 5))
     plt.barh(top["NUTS2_CODE"], top["percentage"], color="blue")
-    plt.xlabel('% of job vacancies in green industries', fontproperties=prop, size=16)
+    plt.xlabel("% of job vacancies in green industries", fontproperties=prop, size=16)
     plt.xticks(fontproperties=prop, size=14)
     plt.yticks(fontproperties=prop, size=14)
 
@@ -131,7 +132,8 @@ def plot_green_locations(labelled_jobs):
     )
     plt.tight_layout()
 
+
 if __name__ == "__main__":
     green_labelled_jobs = get_labelled_jobs("green_jobs_output")
     plot_job_title_clusters(green_labelled_jobs, 15)
-    #plot_green_locations(green_labelled_jobs)
+    # plot_green_locations(green_labelled_jobs)
