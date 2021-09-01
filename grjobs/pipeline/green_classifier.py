@@ -155,7 +155,6 @@ class GreenClassifier:
         with open(model_path, "wb") as f:
             pickle.dump(self, f)
 
-
 # %%
 def load_model(file_name):
 
