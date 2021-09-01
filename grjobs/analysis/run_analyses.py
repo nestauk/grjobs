@@ -24,7 +24,6 @@ analysis_params = get_yaml_config(
     Path(str(PROJECT_DIR) + "/grjobs/config/analysis_config.yaml")
 )
 
-
 def get_labelled_jobs(prefix="green_jobs_output"):
     """loads labelled data as pickle from s3"""
     return load_pkl_from_s3(prefix)
@@ -44,7 +43,7 @@ def get_recent_job_ads():
     ]
     return [
         job for job in jobs if job["created"] >= datetime.datetime(2021, 4, 1, 0, 0)
-    ]  # make sure this is three months indy...
+    ]
 
 
 def get_transformer():
@@ -52,7 +51,7 @@ def get_transformer():
     return SentenceTransformer(analysis_params["embedding_model"])
 
 
-def cluster_job_titles(labelled_jobs) -> pd.DataFrame():
+def cluster_job_titles(labelled_jobs) -> pd.DataFrame:
     """Clusters unique job titles for jobs labelled green.
     
     Encodes unique job titles using a sentence transformer. Reduces dimensionality of embeddings using UMAP to
@@ -150,7 +149,7 @@ def get_salaries(labelled_jobs) -> list:
     """
     green_salaries = []
     non_green_salaries = []
-    green_ids = get_green_ids(labelled_jobs)
+    green_ids = get_job_ids(labelled_jobs)
 
     for job in get_recent_job_ads():
         if "salary" in job["features"].keys():
