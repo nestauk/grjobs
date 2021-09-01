@@ -1,4 +1,5 @@
-numpy
+numpy==1.19
+cython
 scipy
 pandas
 matplotlib
@@ -19,8 +20,6 @@ lxml
 requests-cache
 BeautifulSoup4
 wget
-pymysql 
-mysql-connector-python
 python-Levenshtein
 umap-learn
 sentence_transformers
@@ -28,3 +27,9 @@ python-dotenv
 pyyaml
 ipywidgets
 adjustText
+bs4==0.0.1
+cloudscraper>=1.2.48
+pytest-timeout==1.4.2
+mysql-connector-python==8.0.23
+PyMySQL==0.9.3
+python_dateutil==2.8.1
