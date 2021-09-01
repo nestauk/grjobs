@@ -72,7 +72,7 @@ def plot_job_title_clusters(labelled_jobs, random_cluster_no):
 
     texts = []
     for cluster, x, y in zip(cluster_labels, x_labels, y_labels):
-        texts.append(x, y, cluster, fontproperties=prop, size=20)
+        texts.append(plt.text(x, y, cluster, fontproperties=prop, size=20))
 
     plt.axis("off")
     ax.set_title(
@@ -84,7 +84,6 @@ def plot_job_title_clusters(labelled_jobs, random_cluster_no):
     adjust_text(
         texts, force_points=1, arrowprops=dict(arrowstyle="->", color="r", lw=0.5)
     )
-
 
 def plot_green_locations(labelled_jobs):
     """
@@ -98,6 +97,7 @@ def plot_green_locations(labelled_jobs):
     all_locations = []
     green_ids = get_job_ids(labelled_jobs)
     for job in get_recent_job_ads():
+
         if job["id"] not in green_ids and "location" in job["features"].keys():
             all_locations.append(job["features"]["location"]["nuts_2_name"])
 
@@ -120,20 +120,18 @@ def plot_green_locations(labelled_jobs):
     # plot
     fig, ax = plt.subplots(figsize=(9.2, 5))
     plt.barh(top["NUTS2_CODE"], top["percentage"], color="blue")
-    plt.xlabel("percentage of green roles (%)", fontproperties=prop, size=16)
+    plt.xlabel('% of job vacancies in green industries', fontproperties=prop, size=16)
     plt.xticks(fontproperties=prop, size=14)
-    plt.ylabel("NUTS2 code", fontproperties=prop, size=16)
     plt.yticks(fontproperties=prop, size=14)
 
     plt.title(
-        "Online Job Adverts in Green Industries (%) by NUTS2 code",
+        "Online Job Vacancies \n in Green Industries by Region",
         fontproperties=prop,
         size=20,
     )
     plt.tight_layout()
 
-
 if __name__ == "__main__":
     green_labelled_jobs = get_labelled_jobs("green_jobs_output")
     plot_job_title_clusters(green_labelled_jobs, 15)
-    plot_green_locations(green_labelled_jobs)
+    #plot_green_locations(green_labelled_jobs)
