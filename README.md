@@ -35,13 +35,13 @@ Assumed Python version: `python==3.8`
   - Install: `git-crypt` and `conda`
   - Have a Nesta AWS account configured with `awscli`
 - Run `make install` to configure the development environment:
-  - Setup the conda environment
+  - Configure conda environment
   - Configure pre-commit
   - Configure metaflow to use AWS
 
 Please checkout an existing branch (for example, the branch for the PR you are reviewing), or checkout a new branch (which must conform to our naming convention). If you have already made changes to a branch, you should commit or stash these. Then (from the repo base):
 
-` pip install -e .` - to upload the necessary requirements to run the script
+` pip install -e .` - to upload the necessary requirements to run the scripts
 
 `conda install -c anaconda py-xgboost` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
 
@@ -57,7 +57,7 @@ To train the model with model parameters in the `base.yaml` config file, run the
 
 This will output a `'best_model.pkl'` that you can then load and apply to the job ads data.
 
-Alternatively, you can run the already saved, trained model on data from the OJO database by running:
+You can run the trained model on data from the OJO database by running:
 
 `python grjobs/pipeline/green_classifier_flow.py run`
 
@@ -66,8 +66,9 @@ This will apply the model to 100 job ads within the job ads database and assign 
 Finally, if you want to run the model on a job advert outside the database, run the following:
 
 ```
+from grjobs.pipeline.green_classifier import load_model
 model = load_model('best_model')
-model.predict([JOB ADVERT])
+model.predict(['job_title_raw': 'job title', 'description': 'description'])
 ```
 
 Where the model takes a list of job adverts as input. NOTE: the job advert will need to be structured identically to jobs in database i.e. the job advert must be a dictionary with keys `job_title_raw` and `description` containing the job title and job description as values.
