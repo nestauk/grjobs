@@ -26,7 +26,11 @@ If you're interested in reading more about the methodology itself, [click here](
 
 To apply the current model in the repo to job adverts outside the [Open Jobs Observatory (OJO) database](https://github.com/nestauk/ojd_daps), you will first need to a) clone the repository then b) create a grjobs virtual environment. 
 
-You can create a virutal environment and install the relevant requirements by writing the following commands in your terminal:
+To clone the repository:
+
+git clone git@github.com:nestauk/grjobs.git
+
+Then, you can create a virutal environment and install the relevant requirements by writing the following commands in your terminal:
 
 
 `conda create --name grjobs` - to create the grjobs virtual environment
