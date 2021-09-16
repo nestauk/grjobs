@@ -45,7 +45,7 @@ model.predict([{'job_title_raw': 'job title', 'description': 'description'}])
 
 Where the model takes a list of dictionaries of job adverts as input. 
 
-**NOTE:** the job advert will need to be structured identically to jobs in the database i.e. the job advert must be a dictionary with keys `job_title_raw` and `description` containing the job title and job description as values.
+**NOTE:** the job advert will need to be structured identically to jobs in the database i.e. the job advert must be a dictionary with keys `job_title_raw` and `description` containing the job title and job description as values. Also note that the model was originally built to identify jobs within the [Open Jobs Observatory (OJO) database](https://github.com/nestauk/ojd_daps) and so may not generalise as well to all job adverts. 
 
 ## [INTERNAL] Training/applying the model
 
