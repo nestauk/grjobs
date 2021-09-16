@@ -8,12 +8,7 @@ else
 	OPEN=open
 endif
 
-# AWS Profile
 PROFILE = default
-
-# Export all environment variables
-export
-
 # Import env variables
 include .env.shared
 $(shell touch .env)
@@ -26,27 +21,6 @@ define execute_in_env
 	source bin/conda_activate.sh && conda_activate && $1
 endef
 
-
-
-.PHONY: test-setup
-## Test that everything has been setup
-test-setup:
-	@echo Testing configuration
-
-	@# Checking S3
-	@$(call execute_in_env, (test '${IN_PYTEST}' && echo 'In test-suite: Skipping S3 checks') ||\
-	 aws s3 ls s3://${BUCKET} &> /dev/null || echo "ERROR: No bucket")
-
-	@# Github
-	@(test '${IN_PYTEST}' && echo 'In test-suite: Skipping Github checks') ||\
-	 git ls-remote &> /dev/null || echo "ERROR: No Git remote"
-
-	@# Pre-commit valid
-	@$(call execute_in_env, pre-commit run -a)
-
-	@# Metaflow
-	@$(call execute_in_env, python bin/check_metaflow_aws.py || echo "ERROR: Metaflow+AWS configuration")
-
 .PHONY: init
 ## Fully initialise a project: install; setup github repo; setup S3 bucket
 init: install setup-github setup-bucket
@@ -55,6 +29,7 @@ init: install setup-github setup-bucket
 .PHONY: install
 ## Install a project: create conda env; install local package; setup git hooks; setup metaflow+AWS
 install: conda-create setup-git setup-metaflow
+	@echo INSTALL COMPLETE
 
 .PHONY: inputs-pull
 ## Pull `inputs/` from S3
@@ -85,18 +60,14 @@ docs-open:
 
 .PHONY: conda-create
 ## Create a conda environment
-conda-create: .conda_exists
-
-.conda_exists:
-	conda env create -q -n ${REPO_NAME} -f environment.yaml
+conda-create:
+	conda env create -q -n ${PROJECT_NAME} -f environment.yaml
 	$(MAKE) -s pip-install
-	touch .conda_exists
-	@echo Created environment ${REPO_NAME}
 
 .PHONY: conda-update
 ## Update the conda-environment based on changes to `environment.yaml`
 conda-update:
-	conda env update -n ${REPO_NAME} -f environment.yaml
+	conda env update -n ${PROJECT_NAME} -f environment.yaml
 	$(MAKE) pip-install
 
 .PHONY: clean
@@ -134,7 +105,7 @@ setup-metaflow:
 
 .PHONY: setup-bucket
 setup-bucket:
-	@echo S3
+	@echo S£
 	$(call execute_in_env, ${SHELL} ./bin/create_bucket.sh)
 
 .PHONY: setup-github
