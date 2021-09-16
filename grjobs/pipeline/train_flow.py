@@ -13,7 +13,7 @@ from metaflow import FlowSpec, step
 from grjobs.pipeline.green_classifier import GreenClassifier
 
 from grjobs.getters.keywords import get_expanded_green_words
-from grjobs.pipeline.create_labelled_data import load_json_from_s3
+from grjobs.pipeline.green_count import load_json_from_s3
 # ---------------------------------------------------------------------------------
 
 class TrainGreenFlow(FlowSpec):
