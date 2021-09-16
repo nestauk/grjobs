@@ -30,7 +30,7 @@ To clone the repository:
 
 `git clone git@github.com:nestauk/grjobs.git`
 
-Then, you can create a virutal environment and install the relevant requirements by writing the following commands in your terminal:
+Then, you can create a virutal environment and install the relevant requirements (at the repo base) by writing the following commands in your terminal:
 
 
 `conda create --name grjobs` - to create the grjobs virtual environment
