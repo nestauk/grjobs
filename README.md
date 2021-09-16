@@ -1,65 +1,85 @@
-# Green Jobs
+# Identifying Jobs in EGSS
 
-## Identifying Green Jobs 
+## Identifying Jobs in EGSS: Introduction
 
-The aim of this project is to identify green jobs within the [Open Jobs Observatory](https://github.com/nestauk/ojd_daps) job adverts database as part of a case study deliverable for the Department of Education. 
+The aim of this project is to identify jobs in green industries within the [Open Jobs Observatory](https://github.com/nestauk/ojd_daps) job adverts database, in partnership with the Department of Education.
 
-This repo contains the methodology for doing so. At a high level, the methodology is as follows:
+In parallel with government intervention to stimulate the green economy, we have developed one of the first open methodologies for automatically identifying job advertisements in green industries. This effort has come during a time of busy policy action: the UK Government has recently committed to creating and supporting millions of jobs in green industries by 2030, in a new Ten Point Plan for a Green Industrial Revolution report. They have also created a Green Jobs Taskforce to facilitate this goal. We chose to operationalise one official definition of jobs in green industries: the United Nations System of Environmental Accounting’s Environmental Goods and Services Sector (EGSS) . The EGSS is made up of areas of the economy engaged in producing goods and services for environmental protection purposes, as well as those engaged in conserving and maintaining natural resources. There are 17 different UK specific activities associated with EGSS, including (but not limited to): wastewater management, forest management, environmental consulting and in-house business activities that include waste and recycling. Our methodology identifies both critical roles (e.g. a renewable energy engineer) and general roles (e.g. an accountant for a green energy company) within these sectors.
 
-1) Preprocess the text to: 
-	a) Remove punctuation
-	b) Detect sentences
-	c) Lemmatise terms
-	d) lowercase terms
-	e) remove numbers
-	f) remove stopwords
+If you're interested in learning more about our results, [click here](https://www.nesta.org.uk/project-updates/green-jobs-results-OJO/). If you're interested in reading about the methodology, [click here](https://www.nesta.org.uk/project-updates/green-jobs-methodology-OJO/).
 
-2) Generate bespoke normalised green count feature based on keyword expansion   
-3) Create tfidf vectors and stack bespoke feature 
-4) Oversample labelled training embeddings to address class imbalance using a Synthetic Minority Oversampling Technique (SMOTE)
-5) Train a gradient boosted decision tree algorithm to predict whether jobs are green or not_green 
+## Identifying Jobs in EGSS: Methodology
 
-The current methodology results in a weighted F1 score of: **94%**. 
+At the highest level, we took a supervised machine learning approach to identifying jobs in green industries. This meant that we manually labelled jobs as either green or not green according to the EGSS definition and trained a classifier to label unseen jobs as belonging to either of those categories. Please see below a diagram of the methodology:
 
-## Running the Green Jobs Pipeline
+<img width="1437" alt="methodology" src="https://user-images.githubusercontent.com/46863334/133442923-ce6d14e4-2103-4f54-a0d8-87285a7dc860.png">
 
-To clone the repository: 
+The current methodology results in a weighted F1 score of: **94%**.
 
-```git clone git@github.com:nestauk/grjobs.git``` 
+If you're interested in reading more about the methodology itself, [click here](https://www.nesta.org.uk/project-updates/green-jobs-methodology-OJO/).
 
-Assumed Python version: ```python==3.8```
+## Running the Jobs in EGSS Pipeline
+
+## [EXTERNAL] Applying the model
+
+To apply the current model in the repo to job adverts outside the OJO database, you will first need to create a grjobs virtual environment. You can do so by writing the following in your terminal:
+
+
+`conda create --name grjobs` - to create the grjobs virtual environment
+
+`conda activate grjobs` - to activate the grjobs virtual environment
+
+`pip install -r requirements.txt` - to install the relevant modules
+
+`conda install -c conda-forge py-xgboost` - to install xgboost
+
+Then (in your activated grjobs environment), run the following:
+
+```
+from grjobs.pipeline.green_classifier import load_model
+model = load_model('best_model')
+model.predict([{'job_title_raw': 'job title', 'description': 'description'}])
+```
+
+Where the model takes a list of dictionaries of job adverts as input. 
+
+**NOTE:** the job advert will need to be structured identically to jobs in the database i.e. the job advert must be a dictionary with keys `job_title_raw` and `description` containing the job title and job description as values.
+
+## [INTERNAL] Training/applying the model
+
+To clone the repository:
+
+`git clone git@github.com:nestauk/grjobs.git`
+
+Assumed Python version: `python==3.8`
 
 - Meet the data science cookiecutter [requirements](http://nestauk.github.io/ds-cookiecutter/quickstart), in brief:
   - Install: `git-crypt` and `conda`
   - Have a Nesta AWS account configured with `awscli`
 - Run `make install` to configure the development environment:
-  - Setup the conda environment
+  - Configure conda environment
   - Configure pre-commit
   - Configure metaflow to use AWS
 
-Please checkout an existing branch (for example, the branch for the PR you are reviewing), or checkout a new branch (which must conform to our naming convention). If you have already made changes to a branch, you should commit or stash these. Then (from the repo base):
+Then (in your activated grjobs environment):
 
-``` pip install -e .``` - to upload the necessary requirements to run the script
+`conda install -c conda-forge py-xgboost` - to install xgboost
 
-```conda install -c anaconda py-xgboost``` - to install mac OS, anaconda-compatible xgboost (see known issue <a target="_blank" href="https://github.com/dmlc/xgboost/issues/1446">here</a>)
+`conda install -c conda-forge hdbscan` - to install hdbscan for job title clustering analysis
 
-```conda install -c conda-forge hdbscan``` - to install hdbscan for job title clustering analysis
+To access the ojd_daps codebase and job ads data from the database, you will need to clone the ojd_daps repo by following instructions [here](https://github.com/nestauk/ojd_daps#for-contributors). Make sure you have run `export PYTHONPATH=$PWD` at the repository's root to access the codebase. You will need to either be on Nesta HQ's wifi or have your VPN turned on to access data from the database.
 
+To train the model with model parameters in the `base.yaml` config file, run the following metaflow command (in your activated `grjobs` environment!):
 
-To train the model with model parameters in the ```base.yaml``` config file, run the following metaflow command (in your activated `grjobs` environment!):
+`python grjobs/pipeline/train_flow.py run`
 
-```python grjobs/pipeline/train_flow.py run```
+This will output a `'best_model.pkl'` that you can then load and apply to the job ads data.
 
-This will output a ```'best_model.pkl'``` that you can then load and apply to the job ads data.
+You can run the trained model on data from the OJO database by running:
 
-Alternatively, you can run the already saved, trained model on data from the database by running:
+`python grjobs/pipeline/green_classifier_flow.py run`
 
-```python grjobs/pipeline/green_classifier_flow.py run```
-
-This will apply the model to 100 job ads within the job ads database and assign an associated class (green or not_green) per job.  
-
-To access the ojd_daps codebase and job ads data from the database, you will need to clone the ojd_daps repo by following instructions [here](https://github.com/nestauk/ojd_daps#for-contributors). Make sure you have run ```export PYTHONPATH=$PWD``` at the repository's root to access the codebase. You will need to either be on Nesta HQ's wifi or have your VPN turned on to access the job ads data. 
-
+This will apply the model to 100 job ads within the job ads database and assign an associated class (green or not_green) per job.
 
 ## Contributor guidelines
 
@@ -70,3 +90,4 @@ To access the ojd_daps codebase and job ads data from the database, you will nee
 <small><p>Project based on <a target="_blank" href="https://github.com/nestauk/ds-cookiecutter">Nesta's data science project template</a>
 (<a href="http://nestauk.github.io/ds-cookiecutter">Read the docs here</a>).
 </small>
+
