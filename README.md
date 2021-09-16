@@ -24,14 +24,17 @@ If you're interested in reading more about the methodology itself, [click here](
 
 ## [EXTERNAL] Applying the model
 
-To apply the current model in the repo to job adverts outside the [Open Jobs Observatory (OJO) database](https://github.com/nestauk/ojd_daps), you will first need to create a grjobs virtual environment. You can do so by writing the following in your terminal:
+To apply the current model in the repo to job adverts outside the [Open Jobs Observatory (OJO) database](https://github.com/nestauk/ojd_daps), you will first need to a) clone the repository then b) create a grjobs virtual environment. 
+
+You can create a virutal environment and install the relevant requirements by writing the following commands in your terminal:
 
 
 `conda create --name grjobs` - to create the grjobs virtual environment
 
 `conda activate grjobs` - to activate the grjobs virtual environment
 
-`pip install -r requirements.txt` - to install the relevant modules
+`pip install -r requirements.txt` 
+`pip install -e .` - to install the relevant modules
 
 `conda install -c conda-forge py-xgboost` - to install xgboost
 
