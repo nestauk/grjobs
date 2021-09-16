@@ -28,7 +28,7 @@ To apply the current model in the repo to job adverts outside the [Open Jobs Obs
 
 To clone the repository:
 
-git clone git@github.com:nestauk/grjobs.git
+`git clone git@github.com:nestauk/grjobs.git`
 
 Then, you can create a virutal environment and install the relevant requirements by writing the following commands in your terminal:
 
