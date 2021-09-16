@@ -24,7 +24,7 @@ If you're interested in reading more about the methodology itself, [click here](
 
 ## [EXTERNAL] Applying the model
 
-To apply the current model in the repo to job adverts outside the OJO database, you will first need to create a grjobs virtual environment. You can do so by writing the following in your terminal:
+To apply the current model in the repo to job adverts outside the [Open Jobs Observatory (OJO) database](https://github.com/nestauk/ojd_daps), you will first need to create a grjobs virtual environment. You can do so by writing the following in your terminal:
 
 
 `conda create --name grjobs` - to create the grjobs virtual environment
