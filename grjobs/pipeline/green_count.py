@@ -18,8 +18,6 @@ from grjobs.utils.text_cleaning_utils import clean_text
 
 S3_PATH = "labs/green-jobs/{}"
 BUCKET_NAME = "open-jobs-lake"
-# get model ouputs path
-pretrained_model_path = str(PROJECT_DIR) + grjobs_config["MODEL_OUTPUT_PATH"]
 
 @lru_cache(maxsize=None)
 def load_from_s3(filename):
