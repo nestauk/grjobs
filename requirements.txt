@@ -14,7 +14,7 @@ gensim
 nltk==3.5
 jupyterlab
 boto3
-imblearn
+imbalanced-learn
 daps-utils @ https://github.com/nestauk/daps_utils/archive/dev.zip
 lxml
 requests-cache
@@ -23,7 +23,6 @@ wget
 python-Levenshtein
 umap-learn
 sentence_transformers
-python-dotenv
 pyyaml
 ipywidgets
 adjustText
@@ -31,6 +30,6 @@ bs4==0.0.1
 cloudscraper>=1.2.48
 pytest-timeout==1.4.2
 mysql-connector-python==8.0.23
-PyMySQL==0.9.3
+PyMySQL==1.0.2
 python_dateutil==2.8.1
 networkx
