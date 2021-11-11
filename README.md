@@ -37,7 +37,8 @@ Then, you can create a virutal environment and install the relevant requirements
 
 `conda activate grjobs` - to activate the grjobs virtual environment
 
-`pip install -r requirements.txt` 
+`pip install -r requirements.txt` - to install the relevant modules
+
 `pip install -e .` - to install the relevant modules
 
 `conda install -c conda-forge py-xgboost` - to install xgboost
