@@ -1,12 +1,9 @@
 numpy==1.19
 cython
-scipy
 pandas
 matplotlib
-altair
 metaflow
 python-dotenv
-tqdm
 filelock
 typer
 sh
@@ -15,21 +12,13 @@ nltk==3.5
 jupyterlab
 boto3
 imbalanced-learn
-daps-utils @ https://github.com/nestauk/daps_utils/archive/dev.zip
-lxml
 requests-cache
-BeautifulSoup4
 wget
-python-Levenshtein
 umap-learn
 sentence_transformers
 pyyaml
 ipywidgets
 adjustText
-bs4==0.0.1
-cloudscraper>=1.2.48
 pytest-timeout==1.4.2
-mysql-connector-python==8.0.23
-PyMySQL==1.0.2
-python_dateutil==2.8.1
-networkx
+xgboost
+toolz
