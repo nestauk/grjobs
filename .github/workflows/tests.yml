@@ -1,0 +1,44 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  run_test:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        python-version:
+          - '3.7'
+          - '3.8'
+          - '3.9'
+          - '3.10'          
+    runs-on: ${{ matrix.os }}
+    name: Run pytest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install local package
+        run: |
+          pip install grjobs
+
+      - name: Check that can be imported
+        run: |
+          pwd
+          cd $HOME
+          pwd
+          rm -r grjobs
+          ls
+          python -c "import grjobs"
+          python -c "from grjobs.pipeline.green_classifier import load_model"
