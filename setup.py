@@ -19,6 +19,8 @@ setup(
     install_requires=read_lines(BASE_DIR / "requirements.txt"),
     extras_require={"dev": read_lines(BASE_DIR / "requirements_dev.txt")},
     packages=find_packages(exclude=["docs"]),
+    package_data={"": ["*.yaml"]},
+    include_package_data=True,
     version="0.1.0",
     description="identifying green jobs within the OJO database",
     author="Nesta",
