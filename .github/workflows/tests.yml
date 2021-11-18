@@ -14,10 +14,7 @@ jobs:
           - ubuntu-latest
           - macos-latest
         python-version:
-          - '3.7'
           - '3.8'
-          - '3.9'
-          - '3.10'          
     runs-on: ${{ matrix.os }}
     name: Run pytest
     steps:
@@ -27,18 +24,17 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: ${{ matrix.python-version }}
 
       - name: Install local package
         run: |
-          pip install grjobs
+          pip install wheel
+          pip install .
 
       - name: Check that can be imported
         run: |
-          pwd
           cd $HOME
-          pwd
-          rm -r grjobs
-          ls
+          mkdir test_dir
+          cd test_dir
           python -c "import grjobs"
           python -c "from grjobs.pipeline.green_classifier import load_model"

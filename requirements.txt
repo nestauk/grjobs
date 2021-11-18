@@ -20,3 +20,5 @@ pyyaml
 ipywidgets
 adjustText
 pytest-timeout==1.4.2
+xgboost
+toolz
