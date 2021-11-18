@@ -24,13 +24,17 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: ${{ matrix.python-version }}
 
       - name: Install local package
         run: |
-          pip install grjobs
+          pip install wheel
+          pip install .
 
       - name: Check that can be imported
         run: |
+          cd $HOME
+          mkdir test_dir
+          cd test_dir
           python -c "import grjobs"
           python -c "from grjobs.pipeline.green_classifier import load_model"
